@@ -26,6 +26,13 @@ start_frontend() {
     cd - > /dev/null
 }
 
+cleanup() {
+    echo "Stopping all services and frontend..."
+    kill $(jobs -p) >/dev/null 2>&1 || true
+    wait
+    echo "All services and frontend are stopped"
+}
+
 mkdir -p logs pids
 
 start_service "auth-service"
@@ -37,5 +44,6 @@ start_frontend
 
 echo "All services and frontend are started"
 
-trap "kill $(jobs -p)" EXIT
+trap cleanup EXIT
+
 wait
