@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+input {
+    display: block;
+    margin: 10px 0;
+}

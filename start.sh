@@ -18,6 +18,9 @@ start_service() {
 start_frontend() {
     echo "Starting frontend..."
     cd "frontend"
+    npm install --save-dev @babel/plugin-proposal-private-property-in-object
+    npm install html-loader html-react-parser@latest bootstrap react-router-dom
+
     npm install
     npm start > "../logs/frontend.log" 2>&1 &
     local frontend_pid=$!

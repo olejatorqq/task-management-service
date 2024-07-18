@@ -1,34 +1,24 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import AuthContext from '../context/AuthContext';
+import htmlContent from '../../static/notifications.html';
+import parse from 'html-react-parser';
 
 const Notification = () => {
     const [notifications, setNotifications] = useState([]);
-    const { auth } = useContext(AuthContext);
 
     useEffect(() => {
-        const fetchNotifications = async () => {
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_NOTIFICATION_SERVICE_URL}/notifications`, {
-                    headers: {
-                        Authorization: `Bearer ${auth.token}`,
-                    },
-                });
-                setNotifications(response.data);
-            } catch (error) {
-                console.error('Error fetching notifications', error);
-            }
-        };
-
-        fetchNotifications();
-    }, [auth]);
+        axios.get('/api/notifications').then(response => setNotifications(response.data));
+    }, []);
 
     return (
         <div>
-            <h2>Notifications</h2>
-            <ul>
-                {notifications.map((notification) => (
-                    <li key={notification.id}>{notification.message}</li>
+            {parse(htmlContent)}
+            <ul className="list-group mt-4" id="notification-list">
+                {notifications.map(notification => (
+                    <li key={notification.id} className="list-group-item">
+                        <h5>{notification.title}</h5>
+                        <p>{notification.message}</p>
+                    </li>
                 ))}
             </ul>
         </div>

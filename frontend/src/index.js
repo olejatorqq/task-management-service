@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { AuthProvider } from '/home/oorlovsk/task-management-service/frontend/src/contex/AuthContext';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './styles.css';
 
 ReactDOM.render(
-    <React.StrictMode>
+    <AuthProvider>
         <App />
-    </React.StrictMode>,
+    </AuthProvider>,
     document.getElementById('root')
 );
-
-reportWebVitals();

@@ -1,28 +1,25 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './components/Login';
-import Register from './components/Register';
-import TaskList from './components/TaskList';
+import Navbar from './components/Navbar';
+import Auth from './components/Auth';
+import Task from './components/Task';
 import Notification from './components/Notification';
-import UserProfile from './components/UserProfile';
-import AuthProvider from './context/AuthContext';
+import User from './components/User';
 
-function App() {
+const App = () => {
     return (
-        <AuthProvider>
-            <Router>
-                <div className="App">
-                    <Switch>
-                        <Route path="/login" component={Login} />
-                        <Route path="/register" component={Register} />
-                        <Route path="/tasks" component={TaskList} />
-                        <Route path="/notifications" component={Notification} />
-                        <Route path="/profile" component={UserProfile} />
-                    </Switch>
-                </div>
-            </Router>
-        </AuthProvider>
+        <Router>
+            <div>
+                <Navbar />
+                <Switch>
+                    <Route path="/login" component={Auth} />
+                    <Route path="/tasks" component={Task} />
+                    <Route path="/notifications" component={Notification} />
+                    <Route path="/users" component={User} />
+                </Switch>
+            </div>
+        </Router>
     );
-}
+};
 
 export default App;
