@@ -39,6 +39,6 @@
     "bootstrap": "^5.3.3",
     "html-loader": "^5.0.0",
     "react-html-parser": "^2.0.2",
-    "react-router-dom": "^5.3.4"
+    "react-router-dom": "^6.25.1"
   }
 }

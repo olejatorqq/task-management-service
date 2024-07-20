@@ -19,7 +19,7 @@ start_frontend() {
     echo "Starting frontend..."
     cd "frontend"
     npm install --save-dev @babel/plugin-proposal-private-property-in-object
-    npm install html-loader react-html-parser bootstrap axios react-router-dom html-loader --save-dev
+    npm install html-loader react-html-parser bootstrap axios react-router-dom@^6 html-loader --save-dev
 
     npm install
     npm start > "../logs/frontend.log" 2>&1 &

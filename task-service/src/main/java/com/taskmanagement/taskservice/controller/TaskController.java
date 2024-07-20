@@ -24,6 +24,11 @@ public class TaskController {
         return taskService.getTaskById(id);
     }
 
+    @GetMapping("/user/{userId}")
+    public List<Task> getTasksByUserId(@PathVariable Long userId) {
+        return taskService.getTasksByUserId(userId);
+    }
+
     @PostMapping
     public Task createTask(@RequestBody Task task) {
         return taskService.createTask(task);
