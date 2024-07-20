@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import htmlContent from '../../static/users.html';
-import parse from 'html-react-parser';
 
 const User = () => {
     const [users, setUsers] = useState([]);
@@ -11,12 +9,12 @@ const User = () => {
     }, []);
 
     return (
-        <div>
-            {parse(htmlContent)}
+        <div className="container">
+            <h2>Users</h2>
             <ul className="list-group mt-4" id="user-list">
                 {users.map(user => (
                     <li key={user.id} className="list-group-item">
-                        <h5>{user.name}</h5>
+                        <h5>{user.username}</h5>
                         <p>{user.email}</p>
                     </li>
                 ))}

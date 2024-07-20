@@ -1,12 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { AuthContext } from '../contex/AuthContext';
-import htmlContent from '../../static/auth.html';
-import parse from 'html-react-parser';
 
 const Auth = () => {
     const { login, logout, user } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const handleSubmit = useCallback((e) => {
+        e.preventDefault();
+        login({ email, password });
+    }, [email, password, login]);
 
     useEffect(() => {
         const form = document.getElementById('auth-form');
@@ -18,22 +21,43 @@ const Auth = () => {
                 form.removeEventListener('submit', handleSubmit);
             }
         };
-    }, [email, password]);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        login({ email, password });
-    };
+    }, [handleSubmit]);
 
     return (
-        <div>
+        <div className="container">
             {user ? (
-                <div className="container">
+                <div>
                     <h2>Welcome, {user.email}</h2>
                     <button className="btn btn-danger" onClick={logout}>Logout</button>
                 </div>
             ) : (
-                parse(htmlContent)
+                <div>
+                    <form id="auth-form">
+                        <div className="mb-3">
+                            <label htmlFor="email" className="form-label">Email address</label>
+                            <input
+                                type="email"
+                                className="form-control"
+                                id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Login</button>
+                    </form>
+                </div>
             )}
         </div>
     );

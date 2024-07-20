@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import htmlContent from '../../static/notifications.html';
-import parse from 'html-react-parser';
+import ReactHtmlParser from 'react-html-parser';
 
 const Notification = () => {
     const [notifications, setNotifications] = useState([]);
@@ -11,13 +10,15 @@ const Notification = () => {
     }, []);
 
     return (
-        <div>
-            {parse(htmlContent)}
+        <div className="container">
+            {ReactHtmlParser(`
+                <ul class="list-group mt-4" id="notification-list"></ul>
+            `)}
             <ul className="list-group mt-4" id="notification-list">
                 {notifications.map(notification => (
                     <li key={notification.id} className="list-group-item">
-                        <h5>{notification.title}</h5>
                         <p>{notification.message}</p>
+                        <p><strong>Recipient:</strong> {notification.recipient}</p>
                     </li>
                 ))}
             </ul>
